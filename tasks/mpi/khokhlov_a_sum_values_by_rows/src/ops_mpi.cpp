@@ -17,8 +17,7 @@ bool khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi::PreProcessingImpl()
 }
 
 bool khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi::ValidationImpl() {
-  if (world.rank() == 0)
-    return (task_data->inputs_count[1] == task_data->outputs_count[0]);
+  if (world.rank() == 0) return (task_data->inputs_count[1] == task_data->outputs_count[0]);
   return true;
 }
 

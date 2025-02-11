@@ -17,6 +17,7 @@ class Sum_val_by_rows : public ppc::core::Task {
   bool ValidationImpl() override;
   bool RunImpl() override;
   bool PostProcessingImpl() override;
+
  private:
   std::vector<int> input_;
   int row, col;
