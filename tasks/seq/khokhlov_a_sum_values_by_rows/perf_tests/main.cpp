@@ -4,8 +4,8 @@
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
 
 TEST(khokhlov_a_sum_values_by_rows_seq, test_pipline_run_seq) {
-  const int rows = 5000;
-  const int cols = 5000;
+  const int rows = 90000;
+  const int cols = 90000;
 
   // create data
   std::vector<int> in(cols * rows, 0);
@@ -51,8 +51,8 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_pipline_run_seq) {
 }
 
 TEST(khokhlov_a_sum_values_by_rows_seq, test_task_run_seq) {
-  const int rows = 5000;
-  const int cols = 5000;
+  const int rows = 90000;
+  const int cols = 90000;
 
   // create data
   std::vector<int> in(cols * rows, 0);
