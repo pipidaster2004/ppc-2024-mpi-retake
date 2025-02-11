@@ -12,12 +12,11 @@ std::vector<int> getRandomMatrix(int rows, int cols);
 
 class Sum_val_by_rows : public ppc::core::Task {
  public:
-  explicit Sum_val_by_rows(std::shared_ptr<ppc::core::TaskData> taskData_) : Task(std::move(taskData_)) {}
-  bool pre_processing() override;
-  bool validation() override;
-  bool run() override;
-  bool post_processing() override;
-
+  explicit Sum_val_by_rows(ppc::core::TaskDataPtr task_data) : Task(std::move(task_data)) {}
+  bool PreProcessingImpl() override;
+  bool ValidationImpl() override;
+  bool RunImpl() override;
+  bool PostProcessingImpl() override;
  private:
   std::vector<int> input_;
   int row, col;

@@ -2,7 +2,7 @@
 
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
 
-TEST(khokhlov_a_sum_values_by_rows_seq, validation_test) {
+TEST(khokhlov_a_sum_values_by_rows_seq, ValidationImplImpl_test) {
   const int rows = 1;
   const int cols = 1;
 
@@ -12,17 +12,17 @@ TEST(khokhlov_a_sum_values_by_rows_seq, validation_test) {
   std::vector<int> out(rows, 0);
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
 }
 
 TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_empty) {
@@ -35,20 +35,20 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_empty) {
   std::vector<int> out = {};
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
-  sum_val_by_rows.pre_processing();
-  sum_val_by_rows.run();
-  sum_val_by_rows.post_processing();
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
 
@@ -62,20 +62,20 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_2x2_matrix) {
   std::vector<int> out(rows, 0);
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
-  sum_val_by_rows.pre_processing();
-  sum_val_by_rows.run();
-  sum_val_by_rows.post_processing();
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
 
@@ -89,20 +89,20 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_2x4_matrix) {
   std::vector<int> out(rows, 0);
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
-  sum_val_by_rows.pre_processing();
-  sum_val_by_rows.run();
-  sum_val_by_rows.post_processing();
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
 
@@ -116,20 +116,20 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_4x2_matrix) {
   std::vector<int> out(rows, 0);
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
-  sum_val_by_rows.pre_processing();
-  sum_val_by_rows.run();
-  sum_val_by_rows.post_processing();
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
 
@@ -143,20 +143,20 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_4x3_matrix_with_negative_elemen
   std::vector<int> out(rows, 0);
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
-  sum_val_by_rows.pre_processing();
-  sum_val_by_rows.run();
-  sum_val_by_rows.post_processing();
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
 
@@ -170,20 +170,20 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_100x100_matrix) {
   std::vector<int> out(rows, 0);
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
-  sum_val_by_rows.pre_processing();
-  sum_val_by_rows.run();
-  sum_val_by_rows.post_processing();
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
 
@@ -204,20 +204,20 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_1rand_00x100_matrix) {
   std::vector<int> out(rows, 0);
 
   // create task data
-  std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-  taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-  taskdataSeq->inputs_count.emplace_back(in.size());
-  taskdataSeq->inputs_count.emplace_back(rows);
-  taskdataSeq->inputs_count.emplace_back(cols);
-  taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
-  taskdataSeq->outputs_count.emplace_back(out.size());
+  auto task_dataSeq = std::make_shared<ppc::core::TaskData>();
+  task_dataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_dataSeq->inputs_count.emplace_back(in.size());
+  task_dataSeq->inputs_count.emplace_back(rows);
+  task_dataSeq->inputs_count.emplace_back(cols);
+  task_dataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_dataSeq->outputs_count.emplace_back(out.size());
 
   // crate task
-  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(taskdataSeq);
-  ASSERT_TRUE(sum_val_by_rows.validation());
-  sum_val_by_rows.pre_processing();
-  sum_val_by_rows.run();
-  sum_val_by_rows.post_processing();
+  khokhlov_a_sum_values_by_rows_seq::Sum_val_by_rows sum_val_by_rows(task_dataSeq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
 

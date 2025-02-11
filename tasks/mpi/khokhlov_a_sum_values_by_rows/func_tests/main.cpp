@@ -28,33 +28,10 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_empty_matrix) {
   }
 
   khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.validation(), true);
-  Sum_val_by_rows_mpi.pre_processing();
-  Sum_val_by_rows_mpi.run();
-  Sum_val_by_rows_mpi.post_processing();
-
-  if (world.rank() == 0) {
-    // Create data
-    std::vector<int> out_seq(cols, 0);
-
-    // Create TaskData
-    std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-    taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskdataSeq->inputs_count.emplace_back(in.size());
-    taskdataSeq->inputs_count.emplace_back(rows);
-    taskdataSeq->inputs_count.emplace_back(cols);
-    taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_seq.data()));
-    taskdataSeq->outputs_count.emplace_back(out_seq.size());
-
-    // Create Task
-    khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_seq Sum_val_by_rows_seq(taskdataSeq);
-    ASSERT_EQ(Sum_val_by_rows_seq.validation(), true);
-    Sum_val_by_rows_seq.pre_processing();
-    Sum_val_by_rows_seq.run();
-    Sum_val_by_rows_seq.post_processing();
-
-    ASSERT_EQ(out_seq, out_par);
-  }
+  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
+  Sum_val_by_rows_mpi.PreProcessingImpl();
+  Sum_val_by_rows_mpi.RunImpl();
+  Sum_val_by_rows_mpi.PostProcessingImpl();
 }
 
 TEST(khokhlov_a_sum_values_by_rows_mpi, test_const_matrix) {
@@ -90,33 +67,13 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_const_matrix) {
   }
 
   khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.validation(), true);
-  Sum_val_by_rows_mpi.pre_processing();
-  Sum_val_by_rows_mpi.run();
-  Sum_val_by_rows_mpi.post_processing();
+  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
+  Sum_val_by_rows_mpi.PreProcessingImpl();
+  Sum_val_by_rows_mpi.RunImpl();
+  Sum_val_by_rows_mpi.PostProcessingImpl();
 
   if (world.rank() == 0) {
     ASSERT_EQ(out_par, expect);
-  }
-  if (world.rank() == 0) {
-    // Create data
-    std::vector<int> out_seq(rows, 0);
-
-    // Create TaskData
-    std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-    taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskdataSeq->inputs_count.emplace_back(in.size());
-    taskdataSeq->inputs_count.emplace_back(rows);
-    taskdataSeq->inputs_count.emplace_back(cols);
-    taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_seq.data()));
-    taskdataSeq->outputs_count.emplace_back(out_seq.size());
-    // Create Task
-    khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_seq Sum_val_by_rows_seq(taskdataSeq);
-    ASSERT_EQ(Sum_val_by_rows_seq.validation(), true);
-    Sum_val_by_rows_seq.pre_processing();
-    Sum_val_by_rows_seq.run();
-    Sum_val_by_rows_seq.post_processing();
-    ASSERT_EQ(out_seq, out_par);
   }
 }
 
@@ -153,33 +110,13 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_const_diag_matrix_with_negativ) {
   }
 
   khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.validation(), true);
-  Sum_val_by_rows_mpi.pre_processing();
-  Sum_val_by_rows_mpi.run();
-  Sum_val_by_rows_mpi.post_processing();
+  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
+  Sum_val_by_rows_mpi.PreProcessingImpl();
+  Sum_val_by_rows_mpi.RunImpl();
+  Sum_val_by_rows_mpi.PostProcessingImpl();
 
   if (world.rank() == 0) {
     ASSERT_EQ(out_par, expect);
-  }
-  if (world.rank() == 0) {
-    // Create data
-    std::vector<int> out_seq(rows, 0);
-
-    // Create TaskData
-    std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-    taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskdataSeq->inputs_count.emplace_back(in.size());
-    taskdataSeq->inputs_count.emplace_back(rows);
-    taskdataSeq->inputs_count.emplace_back(cols);
-    taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_seq.data()));
-    taskdataSeq->outputs_count.emplace_back(out_seq.size());
-    // Create Task
-    khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_seq Sum_val_by_rows_seq(taskdataSeq);
-    ASSERT_EQ(Sum_val_by_rows_seq.validation(), true);
-    Sum_val_by_rows_seq.pre_processing();
-    Sum_val_by_rows_seq.run();
-    Sum_val_by_rows_seq.post_processing();
-    ASSERT_EQ(out_seq, out_par);
   }
 }
 
@@ -214,32 +151,12 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_random_matrix) {
   }
 
   khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.validation(), true);
-  Sum_val_by_rows_mpi.pre_processing();
-  Sum_val_by_rows_mpi.run();
-  Sum_val_by_rows_mpi.post_processing();
+  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
+  Sum_val_by_rows_mpi.PreProcessingImpl();
+  Sum_val_by_rows_mpi.RunImpl();
+  Sum_val_by_rows_mpi.PostProcessingImpl();
 
   if (world.rank() == 0) {
     ASSERT_EQ(out_par, exp);
-  }
-  if (world.rank() == 0) {
-    // Create data
-    std::vector<int> out_seq(rows, 0);
-
-    // Create TaskData
-    std::shared_ptr<ppc::core::TaskData> taskdataSeq = std::make_shared<ppc::core::TaskData>();
-    taskdataSeq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskdataSeq->inputs_count.emplace_back(in.size());
-    taskdataSeq->inputs_count.emplace_back(rows);
-    taskdataSeq->inputs_count.emplace_back(cols);
-    taskdataSeq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_seq.data()));
-    taskdataSeq->outputs_count.emplace_back(out_seq.size());
-    // Create Task
-    khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_seq Sum_val_by_rows_seq(taskdataSeq);
-    ASSERT_EQ(Sum_val_by_rows_seq.validation(), true);
-    Sum_val_by_rows_seq.pre_processing();
-    Sum_val_by_rows_seq.run();
-    Sum_val_by_rows_seq.post_processing();
-    ASSERT_EQ(out_seq, out_par);
   }
 }
