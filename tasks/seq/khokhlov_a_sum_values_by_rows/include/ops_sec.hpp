@@ -7,9 +7,6 @@
 #include "core/task/include/task.hpp"
 
 namespace khokhlov_a_sum_values_by_rows_seq {
-
-std::vector<int> GetRandomMatrix(int rows, int cols);
-
 class SumValByRows : public ppc::core::Task {
  public:
   explicit SumValByRows(ppc::core::TaskDataPtr task_data) : Task(std::move(task_data)) {}

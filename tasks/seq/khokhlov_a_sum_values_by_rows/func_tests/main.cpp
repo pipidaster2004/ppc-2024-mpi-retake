@@ -2,10 +2,24 @@
 
 #include <cstdint>
 #include <memory>
+#include <random>
 #include <vector>
 
 #include "core/task/include/task.hpp"
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
+
+namespace khokhlov_a_sum_values_by_rows_seq {
+inline std::vector<int> GetRandomMatrix(int size) {
+  int sz = size;
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::vector<int> vec(sz);
+  for (int i = 0; i < sz; i++) {
+    vec[i] = (int)(gen() % 100);
+  }
+  return vec;
+}
+}  // namespace khokhlov_a_sum_values_by_rows_seq
 
 TEST(khokhlov_a_sum_values_by_rows_seq, Validation_test) {
   const int rows = 1;
@@ -38,6 +52,87 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_empty) {
   std::vector<int> in = {};
   std::vector<int> expect;
   std::vector<int> out = {};
+
+  // create task data
+  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_data_seq->inputs_count.emplace_back(in.size());
+  task_data_seq->inputs_count.emplace_back(rows);
+  task_data_seq->inputs_count.emplace_back(cols);
+  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_data_seq->outputs_count.emplace_back(out.size());
+
+  // crate task
+  khokhlov_a_sum_values_by_rows_seq::SumValByRows sum_val_by_rows(task_data_seq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
+  ASSERT_EQ(expect, out);
+}
+
+TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_1x1_matrix) {
+  const int rows = 1;
+  const int cols = 1;
+
+  // create data
+  std::vector<int> in = {3};
+  std::vector<int> expect = {3};
+  std::vector<int> out(rows, 0);
+
+  // create task data
+  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_data_seq->inputs_count.emplace_back(in.size());
+  task_data_seq->inputs_count.emplace_back(rows);
+  task_data_seq->inputs_count.emplace_back(cols);
+  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_data_seq->outputs_count.emplace_back(out.size());
+
+  // crate task
+  khokhlov_a_sum_values_by_rows_seq::SumValByRows sum_val_by_rows(task_data_seq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
+  ASSERT_EQ(expect, out);
+}
+
+TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_1x_matrix) {
+  const int rows = 1;
+  const int cols = 5;
+
+  // create data
+  std::vector<int> in = {1, 2, 3, 4, 5};
+  std::vector<int> expect = {15};
+  std::vector<int> out(rows, 0);
+
+  // create task data
+  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_data_seq->inputs_count.emplace_back(in.size());
+  task_data_seq->inputs_count.emplace_back(rows);
+  task_data_seq->inputs_count.emplace_back(cols);
+  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_data_seq->outputs_count.emplace_back(out.size());
+
+  // crate task
+  khokhlov_a_sum_values_by_rows_seq::SumValByRows sum_val_by_rows(task_data_seq);
+  ASSERT_TRUE(sum_val_by_rows.ValidationImpl());
+  sum_val_by_rows.PreProcessingImpl();
+  sum_val_by_rows.RunImpl();
+  sum_val_by_rows.PostProcessingImpl();
+  ASSERT_EQ(expect, out);
+}
+
+TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_x1_matrix) {
+  const int rows = 5;
+  const int cols = 1;
+
+  // create data
+  std::vector<int> in = {1, 2, 3, 4, 5};
+  std::vector<int> expect = {1, 2, 3, 4, 5};
+  std::vector<int> out(rows, 0);
 
   // create task data
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
@@ -197,7 +292,7 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_1rand_00x100_matrix) {
   const int cols = 100;
 
   // create data
-  std::vector<int> in = khokhlov_a_sum_values_by_rows_seq::GetRandomMatrix(rows, cols);
+  std::vector<int> in = khokhlov_a_sum_values_by_rows_seq::GetRandomMatrix(rows * cols);
   std::vector<int> expect(rows, 0);
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;

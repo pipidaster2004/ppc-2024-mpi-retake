@@ -6,10 +6,7 @@
 #include <boost/mpi/collectives/gatherv.hpp>
 #include <boost/mpi/collectives/scatterv.hpp>
 #include <boost/mpi/communicator.hpp>
-#include <random>
 #include <vector>
-
-using namespace std::chrono_literals;
 
 bool khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi::PreProcessingImpl() {
   if (world_.rank() == 0) {
@@ -69,15 +66,4 @@ bool khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi::PostProcessingImpl() {
     }
   }
   return true;
-}
-
-std::vector<int> khokhlov_a_sum_values_by_rows_mpi::GetRandomMatrix(int size) {
-  int sz = size;
-  std::random_device dev;
-  std::mt19937 gen(dev());
-  std::vector<int> vec(sz);
-  for (int i = 0; i < sz; i++) {
-    vec[i] = (int)(gen() % 100);
-  }
-  return vec;
 }

@@ -8,9 +8,6 @@
 #include "core/task/include/task.hpp"
 
 namespace khokhlov_a_sum_values_by_rows_mpi {
-
-std::vector<int> GetRandomMatrix(int size);
-
 class SumValByRowsMpi : public ppc::core::Task {
  public:
   explicit SumValByRowsMpi(ppc::core::TaskDataPtr task_data) : Task(std::move(task_data)) {}

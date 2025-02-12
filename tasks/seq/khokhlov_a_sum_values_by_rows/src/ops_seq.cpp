@@ -39,14 +39,3 @@ bool khokhlov_a_sum_values_by_rows_seq::SumValByRows::PostProcessingImpl() {
   }
   return true;
 }
-
-std::vector<int> khokhlov_a_sum_values_by_rows_seq::GetRandomMatrix(int rows, int cols) {
-  int sz = rows * cols;
-  std::random_device dev;
-  std::mt19937 gen(dev());
-  std::vector<int> vec(sz);
-  for (int i = 0; i < sz; i++) {
-    vec[i] = (int)(gen() % 100);
-  }
-  return vec;
-}
