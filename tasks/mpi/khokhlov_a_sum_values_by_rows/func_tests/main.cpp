@@ -16,22 +16,22 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_empty_matrix) {
   std::vector<int> out_par = {};
 
   // Create TaskData
-  std::shared_ptr<ppc::core::TaskData> taskDataPar = std::make_shared<ppc::core::TaskData>();
+  std::shared_ptr<ppc::core::TaskData> task_data_par = std::make_shared<ppc::core::TaskData>();
 
   if (world.rank() == 0) {
-    taskDataPar->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskDataPar->inputs_count.emplace_back(in.size());
-    taskDataPar->inputs_count.emplace_back(rows);
-    taskDataPar->inputs_count.emplace_back(cols);
-    taskDataPar->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
-    taskDataPar->outputs_count.emplace_back(out_par.size());
+    task_data_par->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+    task_data_par->inputs_count.emplace_back(in.size());
+    task_data_par->inputs_count.emplace_back(rows);
+    task_data_par->inputs_count.emplace_back(cols);
+    task_data_par->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
+    task_data_par->outputs_count.emplace_back(out_par.size());
   }
 
-  khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
-  Sum_val_by_rows_mpi.PreProcessingImpl();
-  Sum_val_by_rows_mpi.RunImpl();
-  Sum_val_by_rows_mpi.PostProcessingImpl();
+  khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi SumValByRowsMpi(task_data_par);
+  ASSERT_EQ(SumValByRowsMpi.ValidationImpl(), true);
+  SumValByRowsMpi.PreProcessingImpl();
+  SumValByRowsMpi.RunImpl();
+  SumValByRowsMpi.PostProcessingImpl();
 }
 
 TEST(khokhlov_a_sum_values_by_rows_mpi, test_const_matrix) {
@@ -55,22 +55,22 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_const_matrix) {
     expect[i] += tmp_sum;
   }
   // Create TaskData
-  std::shared_ptr<ppc::core::TaskData> taskDataPar = std::make_shared<ppc::core::TaskData>();
+  std::shared_ptr<ppc::core::TaskData> task_data_par = std::make_shared<ppc::core::TaskData>();
 
   if (world.rank() == 0) {
-    taskDataPar->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskDataPar->inputs_count.emplace_back(in.size());
-    taskDataPar->inputs_count.emplace_back(rows);
-    taskDataPar->inputs_count.emplace_back(cols);
-    taskDataPar->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
-    taskDataPar->outputs_count.emplace_back(out_par.size());
+    task_data_par->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+    task_data_par->inputs_count.emplace_back(in.size());
+    task_data_par->inputs_count.emplace_back(rows);
+    task_data_par->inputs_count.emplace_back(cols);
+    task_data_par->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
+    task_data_par->outputs_count.emplace_back(out_par.size());
   }
 
-  khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
-  Sum_val_by_rows_mpi.PreProcessingImpl();
-  Sum_val_by_rows_mpi.RunImpl();
-  Sum_val_by_rows_mpi.PostProcessingImpl();
+  khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi SumValByRowsMpi(task_data_par);
+  ASSERT_EQ(SumValByRowsMpi.ValidationImpl(), true);
+  SumValByRowsMpi.PreProcessingImpl();
+  SumValByRowsMpi.RunImpl();
+  SumValByRowsMpi.PostProcessingImpl();
 
   if (world.rank() == 0) {
     ASSERT_EQ(out_par, expect);
@@ -98,22 +98,22 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_const_diag_matrix_with_negativ) {
     expect[i] += tmp_sum;
   }
   // Create TaskData
-  std::shared_ptr<ppc::core::TaskData> taskDataPar = std::make_shared<ppc::core::TaskData>();
+  std::shared_ptr<ppc::core::TaskData> task_data_par = std::make_shared<ppc::core::TaskData>();
 
   if (world.rank() == 0) {
-    taskDataPar->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskDataPar->inputs_count.emplace_back(in.size());
-    taskDataPar->inputs_count.emplace_back(rows);
-    taskDataPar->inputs_count.emplace_back(cols);
-    taskDataPar->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
-    taskDataPar->outputs_count.emplace_back(out_par.size());
+    task_data_par->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+    task_data_par->inputs_count.emplace_back(in.size());
+    task_data_par->inputs_count.emplace_back(rows);
+    task_data_par->inputs_count.emplace_back(cols);
+    task_data_par->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
+    task_data_par->outputs_count.emplace_back(out_par.size());
   }
 
-  khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
-  Sum_val_by_rows_mpi.PreProcessingImpl();
-  Sum_val_by_rows_mpi.RunImpl();
-  Sum_val_by_rows_mpi.PostProcessingImpl();
+  khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi SumValByRowsMpi(task_data_par);
+  ASSERT_EQ(SumValByRowsMpi.ValidationImpl(), true);
+  SumValByRowsMpi.PreProcessingImpl();
+  SumValByRowsMpi.RunImpl();
+  SumValByRowsMpi.PostProcessingImpl();
 
   if (world.rank() == 0) {
     ASSERT_EQ(out_par, expect);
@@ -126,7 +126,7 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_random_matrix) {
   int rows = 13;
 
   // Create data
-  std::vector<int> in = khokhlov_a_sum_values_by_rows_mpi::getRandomMatrix(rows * cols);
+  std::vector<int> in = khokhlov_a_sum_values_by_rows_mpi::GetRandomMatrix(rows * cols);
 
   std::vector<int> out_par(rows, 0);
 
@@ -139,22 +139,22 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_random_matrix) {
     exp[i] += tmp_sum;
   }
   // Create TaskData
-  std::shared_ptr<ppc::core::TaskData> taskDataPar = std::make_shared<ppc::core::TaskData>();
+  std::shared_ptr<ppc::core::TaskData> task_data_par = std::make_shared<ppc::core::TaskData>();
 
   if (world.rank() == 0) {
-    taskDataPar->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
-    taskDataPar->inputs_count.emplace_back(in.size());
-    taskDataPar->inputs_count.emplace_back(rows);
-    taskDataPar->inputs_count.emplace_back(cols);
-    taskDataPar->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
-    taskDataPar->outputs_count.emplace_back(out_par.size());
+    task_data_par->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+    task_data_par->inputs_count.emplace_back(in.size());
+    task_data_par->inputs_count.emplace_back(rows);
+    task_data_par->inputs_count.emplace_back(cols);
+    task_data_par->outputs.emplace_back(reinterpret_cast<uint8_t *>(out_par.data()));
+    task_data_par->outputs_count.emplace_back(out_par.size());
   }
 
-  khokhlov_a_sum_values_by_rows_mpi::Sum_val_by_rows_mpi Sum_val_by_rows_mpi(taskDataPar);
-  ASSERT_EQ(Sum_val_by_rows_mpi.ValidationImpl(), true);
-  Sum_val_by_rows_mpi.PreProcessingImpl();
-  Sum_val_by_rows_mpi.RunImpl();
-  Sum_val_by_rows_mpi.PostProcessingImpl();
+  khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi SumValByRowsMpi(task_data_par);
+  ASSERT_EQ(SumValByRowsMpi.ValidationImpl(), true);
+  SumValByRowsMpi.PreProcessingImpl();
+  SumValByRowsMpi.RunImpl();
+  SumValByRowsMpi.PostProcessingImpl();
 
   if (world.rank() == 0) {
     ASSERT_EQ(out_par, exp);
