@@ -1,11 +1,10 @@
 #include <gtest/gtest.h>
 
+#include <boost/mpi/collectives.hpp>
+#include <boost/mpi/communicator.hpp>
 #include <cstdint>
 #include <memory>
 #include <vector>
-
-#include <boost/mpi/collectives.hpp>
-#include <boost/mpi/communicator.hpp>
 
 #include "core/task/include/task.hpp"
 #include "mpi/khokhlov_a_sum_values_by_rows/include/ops_mpi.hpp"

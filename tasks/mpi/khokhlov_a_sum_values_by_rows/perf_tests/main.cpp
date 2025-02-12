@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 
-// #include <boost/mpi/timer.hpp>
 #include <boost/mpi/collectives.hpp>
 #include <boost/mpi/communicator.hpp>
 #include <chrono>
@@ -8,8 +7,8 @@
 #include <memory>
 #include <vector>
 
-#include "core/task/include/task.hpp"
 #include "core/perf/include/perf.hpp"
+#include "core/task/include/task.hpp"
 #include "mpi/khokhlov_a_sum_values_by_rows/include/ops_mpi.hpp"
 
 TEST(khokhlov_a_sum_values_by_rows_mpi, test_pipeline_Run) {
