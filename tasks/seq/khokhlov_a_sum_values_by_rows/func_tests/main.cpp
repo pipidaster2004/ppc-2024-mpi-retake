@@ -9,7 +9,8 @@
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
 
 namespace khokhlov_a_sum_values_by_rows_seq {
-inline std::vector<int> static GetRandomMatrix(int size) {
+namespace {
+std::vector<int> GetRandomMatrix(int size) {
   int sz = size;
   std::random_device dev;
   std::mt19937 gen(dev());
@@ -19,6 +20,7 @@ inline std::vector<int> static GetRandomMatrix(int size) {
   }
   return vec;
 }
+}  // namespace
 }  // namespace khokhlov_a_sum_values_by_rows_seq
 
 TEST(khokhlov_a_sum_values_by_rows_seq, Validation_test) {
@@ -320,5 +322,3 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_1rand_00x100_matrix) {
   sum_val_by_rows.PostProcessingImpl();
   ASSERT_EQ(expect, out);
 }
-
-// TEST(khokhlov_a_sum_values_by_rows_seq, )
