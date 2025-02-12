@@ -4,11 +4,11 @@
 #include <boost/mpi/collectives.hpp>
 #include <boost/mpi/communicator.hpp>
 #include <chrono>
-#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <vector>
 
+#include "core/task/include/task.hpp"
 #include "core/perf/include/perf.hpp"
 #include "mpi/khokhlov_a_sum_values_by_rows/include/ops_mpi.hpp"
 

@@ -1,14 +1,13 @@
 #include <gtest/gtest.h>
 
-#include <cstddef>
 #include <cstdint>
-#include <fstream>
 #include <memory>
-#include <string>
 #include <vector>
 
+#include <boost/mpi/collectives.hpp>
+#include <boost/mpi/communicator.hpp>
+
 #include "core/task/include/task.hpp"
-#include "core/util/include/util.hpp"
 #include "mpi/khokhlov_a_sum_values_by_rows/include/ops_mpi.hpp"
 
 TEST(khokhlov_a_sum_values_by_rows_mpi, test_empty_matrix) {
@@ -96,7 +95,7 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_const_diag_matrix_with_negativ) {
   std::vector<int> in(cols * rows, 0);
   for (int i = 0; i < rows; i++) {
     for (int j = i; j < cols; j++) {
-      in[i] += -(i * cols + j);
+      in[i] += -((i * cols) + j);
     }
   }
   std::vector<int> out_par(rows, 0);

@@ -33,8 +33,8 @@ bool khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi::RunImpl() {
   broadcast(world_, row_, 0);
   broadcast(world_, col_, 0);
 
-  int delta = row_ / world_.size();
-  int last_row = row_ % world_.size();
+  int delta = (int)(row_ / world_.size());
+  int last_row = (int)(row_ % world_.size());
   int local_n = (world_.rank() == world_.size() - 1) ? delta + last_row : delta;
 
   local_input_ = std::vector<int>(local_n * col_);
@@ -42,7 +42,7 @@ bool khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi::RunImpl() {
   std::vector<int> recv_counts(world_.size());
   for (int i = 0; i < world_.size(); ++i) {
     send_counts[i] = (i == world_.size() - 1) ? delta + last_row : delta;
-    send_counts[i] *= col_;
+    send_counts[i] *= (int)(col_);
     recv_counts[i] = (i == world_.size() - 1) ? delta + last_row : delta;
   }
   boost::mpi::scatterv(world_, input_.data(), send_counts, local_input_.data(), 0);
@@ -54,7 +54,7 @@ bool khokhlov_a_sum_values_by_rows_mpi::SumValByRowsMpi::RunImpl() {
     }
   }
 
-  boost::mpi::gatherv(world_, local_sum.data(), local_sum.size(), sum_.data(), recv_counts, 0);
+  boost::mpi::gatherv(world_, local_sum.data(), (int)local_sum.size(), sum_.data(), recv_counts, 0);
 
   return true;
 }

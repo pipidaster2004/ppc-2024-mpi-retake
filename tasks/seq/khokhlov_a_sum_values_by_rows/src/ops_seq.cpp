@@ -46,7 +46,7 @@ std::vector<int> khokhlov_a_sum_values_by_rows_seq::GetRandomMatrix(int rows, in
   std::mt19937 gen(dev());
   std::vector<int> vec(sz);
   for (int i = 0; i < sz; i++) {
-    vec[i] = gen() % 100;
+    vec[i] = (int)(gen() % 100);
   }
   return vec;
 }

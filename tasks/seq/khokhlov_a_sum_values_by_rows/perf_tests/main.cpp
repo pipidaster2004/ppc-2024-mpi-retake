@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 
 #include <chrono>
-#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <vector>
@@ -25,7 +24,7 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_pipline_run_seq) {
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;
     for (int j = 0; j < cols; j++) {
-      tmp_sum += in[i * cols + j];
+      tmp_sum += in[(i * cols) + j];
     }
     expect[i] += tmp_sum;
   }
@@ -77,7 +76,7 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_task_run_seq) {
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;
     for (int j = 0; j < cols; j++) {
-      tmp_sum += in[i * cols + j];
+      tmp_sum += in[(i * cols) + j];
     }
     expect[i] += tmp_sum;
   }
