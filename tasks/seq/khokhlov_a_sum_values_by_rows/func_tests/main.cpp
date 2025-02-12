@@ -2,25 +2,24 @@
 
 #include <cstdint>
 #include <memory>
-#include <vector>
 #include <random>
+#include <vector>
 
 #include "core/task/include/task.hpp"
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
 
-namespace khokhlov_a_sum_values_by_rows_seq{
-  inline std::vector<int> static GetRandomMatrix(int size){
-    int sz = size;
-    std::random_device dev;
-    std::mt19937 gen(dev());
-    std::vector<int> vec(sz);
-    for (int i = 0; i < sz; i++) {
-      vec[i] = (int)(gen() % 100);
-    }
-    return vec;
+namespace khokhlov_a_sum_values_by_rows_seq {
+inline std::vector<int> static GetRandomMatrix(int size) {
+  int sz = size;
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::vector<int> vec(sz);
+  for (int i = 0; i < sz; i++) {
+    vec[i] = (int)(gen() % 100);
   }
-} // namespace khokhlov_a_sum_values_by_rows_seq
-
+  return vec;
+}
+}  // namespace khokhlov_a_sum_values_by_rows_seq
 
 TEST(khokhlov_a_sum_values_by_rows_seq, Validation_test) {
   const int rows = 1;
