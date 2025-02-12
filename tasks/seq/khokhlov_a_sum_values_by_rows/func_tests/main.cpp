@@ -1,5 +1,14 @@
 #include <gtest/gtest.h>
 
+#include <cstddef>
+#include <cstdint>
+#include <fstream>
+#include <memory>
+#include <string>
+#include <vector>
+
+#include "core/task/include/task.hpp"
+#include "core/util/include/util.hpp"
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
 
 TEST(khokhlov_a_sum_values_by_rows_seq, Validation_test) {
@@ -197,7 +206,7 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_sum_1rand_00x100_matrix) {
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;
     for (int j = 0; j < cols; j++) {
-      tmp_sum += in[i * cols + j];
+      tmp_sum += in[(i * cols) + j];
     }
     expect[i] += tmp_sum;
   }

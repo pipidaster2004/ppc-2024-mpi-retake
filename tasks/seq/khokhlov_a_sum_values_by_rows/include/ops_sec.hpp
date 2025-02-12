@@ -1,6 +1,7 @@
 // Copyright 2023 Nesterov Alexander
 #pragma once
 
+#include <utility>
 #include <vector>
 
 #include "core/task/include/task.hpp"
@@ -19,7 +20,7 @@ class SumValByRows : public ppc::core::Task {
 
  private:
   std::vector<int> input_;
-  int row_, col_;
+  unsigned int row_, col_;
   std::vector<int> sum_;
 };
 

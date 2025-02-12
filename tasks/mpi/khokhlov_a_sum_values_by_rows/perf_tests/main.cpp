@@ -1,6 +1,13 @@
 #include <gtest/gtest.h>
 
-#include <boost/mpi/timer.hpp>
+// #include <boost/mpi/timer.hpp>
+#include <boost/mpi/collectives.hpp>
+#include <boost/mpi/communicator.hpp>
+#include <chrono>
+#include <cstddef>
+#include <cstdint>
+#include <memory>
+#include <vector>
 
 #include "core/perf/include/perf.hpp"
 #include "mpi/khokhlov_a_sum_values_by_rows/include/ops_mpi.hpp"
@@ -22,13 +29,13 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_pipeline_Run) {
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;
     for (int j = 0; j < cols; j++) {
-      tmp_sum += in[i * cols + j];
+      tmp_sum += in[(i * cols) + j];
     }
     expect[i] += tmp_sum;
   }
   std::vector<int> out(rows, 0);
   // Create TaskData
-  std::shared_ptr<ppc::core::TaskData> task_data_par = std::make_shared<ppc::core::TaskData>();
+  auto task_data_par = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
     task_data_par->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
     task_data_par->inputs_count.emplace_back(in.size());
@@ -83,13 +90,13 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_task_Run) {
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;
     for (int j = 0; j < cols; j++) {
-      tmp_sum += in[i * cols + j];
+      tmp_sum += in[(i * cols) + j];
     }
     expect[i] += tmp_sum;
   }
   std::vector<int> out(rows, 0);
   // Create TaskData
-  std::shared_ptr<ppc::core::TaskData> task_data_par = std::make_shared<ppc::core::TaskData>();
+  auto task_data_par = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
     task_data_par->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
     task_data_par->inputs_count.emplace_back(in.size());

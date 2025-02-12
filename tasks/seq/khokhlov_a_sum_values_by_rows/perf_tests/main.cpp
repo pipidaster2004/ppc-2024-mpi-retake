@@ -1,6 +1,13 @@
 #include <gtest/gtest.h>
 
+#include <chrono>
+#include <cstddef>
+#include <cstdint>
+#include <memory>
+#include <vector>
+
 #include "core/perf/include/perf.hpp"
+#include "core/task/include/task.hpp"
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
 
 TEST(khokhlov_a_sum_values_by_rows_seq, test_pipline_run_seq) {
@@ -9,12 +16,17 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_pipline_run_seq) {
 
   // create data
   std::vector<int> in(cols * rows, 0);
-  for (int i = 0; i < rows; i++)
-    for (int j = 0; j < cols; j++) in[i] = i * cols + rows;
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      in[i] = i * cols + rows;
+    }
+  }
   std::vector<int> expect(rows, 0);
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;
-    for (int j = 0; j < cols; j++) tmp_sum += in[i * cols + j];
+    for (int j = 0; j < cols; j++) {
+      tmp_sum += in[i * cols + j];
+    }
     expect[i] += tmp_sum;
   }
   std::vector<int> out(rows, 0);
@@ -56,12 +68,17 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_task_run_seq) {
 
   // create data
   std::vector<int> in(cols * rows, 0);
-  for (int i = 0; i < rows; i++)
-    for (int j = 0; j < cols; j++) in[i] = i * cols + rows;
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      in[i] = i * cols + rows;
+    }
+  }
   std::vector<int> expect(rows, 0);
   for (int i = 0; i < rows; i++) {
     int tmp_sum = 0;
-    for (int j = 0; j < cols; j++) tmp_sum += in[i * cols + j];
+    for (int j = 0; j < cols; j++) {
+      tmp_sum += in[i * cols + j];
+    }
     expect[i] += tmp_sum;
   }
   std::vector<int> out(rows, 0);
