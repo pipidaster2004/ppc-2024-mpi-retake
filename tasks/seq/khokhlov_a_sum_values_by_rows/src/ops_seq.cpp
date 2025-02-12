@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <random>
 #include <vector>
 
 #include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"

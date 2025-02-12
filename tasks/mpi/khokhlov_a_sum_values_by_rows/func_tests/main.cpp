@@ -11,7 +11,7 @@
 #include "mpi/khokhlov_a_sum_values_by_rows/include/ops_mpi.hpp"
 
 namespace khokhlov_a_sum_values_by_rows_mpi {
-inline std::vector<int> GetRandomMatrix(int size) {
+inline std::vector<int> static GetRandomMatrix(int size) {
   int sz = size;
   std::random_device dev;
   std::mt19937 gen(dev());
