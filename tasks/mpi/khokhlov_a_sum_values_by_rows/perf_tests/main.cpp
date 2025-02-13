@@ -14,8 +14,8 @@
 TEST(khokhlov_a_sum_values_by_rows_mpi, test_pipeline_Run) {
   boost::mpi::communicator world;
 
-  int cols = 15000;
-  int rows = 15000;
+  int cols = 22000;
+  int rows = 22000;
 
   // Create data
   std::vector<int> in(cols * rows, 0);
@@ -75,8 +75,8 @@ TEST(khokhlov_a_sum_values_by_rows_mpi, test_pipeline_Run) {
 TEST(khokhlov_a_sum_values_by_rows_mpi, test_task_Run) {
   boost::mpi::communicator world;
 
-  int cols = 15000;
-  int rows = 15000;
+  int cols = 22000;
+  int rows = 22000;
 
   // Create data
   std::vector<int> in(cols * rows, 0);
