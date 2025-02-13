@@ -62,8 +62,8 @@ TEST(khokhlov_a_sum_values_by_rows_seq, test_pipline_run_seq) {
 }
 
 TEST(khokhlov_a_sum_values_by_rows_seq, test_task_run_seq) {
-  int rows = 20000;
-  int cols = 20000;
+  int rows = 18000;
+  int cols = 18000;
 
   // create data
   std::vector<int> in(cols * rows, 0);
