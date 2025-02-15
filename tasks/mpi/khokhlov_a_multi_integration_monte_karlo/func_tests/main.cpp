@@ -2,10 +2,10 @@
 
 #include <boost/mpi/collectives.hpp>
 #include <boost/mpi/communicator.hpp>
+#include <cmath>
 #include <cstdint>
 #include <memory>
 #include <vector>
-#include <cmath>
 
 #include "core/task/include/task.hpp"
 #include "mpi/khokhlov_a_multi_integration_monte_karlo/include/ops_mpi.hpp"
@@ -24,8 +24,7 @@
 //     }
 // }
 
-TEST(khokhlov_a_multi_integration_monte_karlo_mpi, 1)
-{
-    bool a = true;
-    ASSERT_EQ(a, true);
+TEST(khokhlov_a_multi_integration_monte_karlo_mpi, 1) {
+  bool a = true;
+  ASSERT_EQ(a, true);
 }

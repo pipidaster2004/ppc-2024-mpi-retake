@@ -13,14 +13,14 @@ namespace khokhlov_a_multi_integration_monte_karlo_mpi {
 class MonteCarloMpi : public ppc::core::Task {
  public:
   explicit MonteCarloMpi(ppc::core::TaskDataPtr task_data, std::function<double(const std::vector<double>&)> f)
-   : Task(std::move(task_data)), integrand_(f) {}
+      : Task(std::move(task_data)), integrand_(f) {}
   bool PreProcessingImpl() override;
   bool ValidationImpl() override;
   bool RunImpl() override;
   bool PostProcessingImpl() override;
 
  private:
- boost::mpi::communicator world_;
+  boost::mpi::communicator world_;
   size_t dimension_;
   int N_;
   std::vector<double> lower_bound_;

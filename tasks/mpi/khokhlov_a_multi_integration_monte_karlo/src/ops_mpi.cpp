@@ -8,18 +8,10 @@
 #include <boost/mpi/communicator.hpp>
 #include <vector>
 
-bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::PreProcessingImpl() {
-    return true;
-}
+bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::PreProcessingImpl() { return true; }
 
-bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::ValidationImpl() {
-    return true;
-}
+bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::ValidationImpl() { return true; }
 
-bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::RunImpl() {
-    return true;
-}
+bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::RunImpl() { return true; }
 
-bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::PostProcessingImpl() {
-    return true;
-}
+bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::PostProcessingImpl() { return true; }

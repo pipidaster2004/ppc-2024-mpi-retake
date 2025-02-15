@@ -11,7 +11,7 @@ namespace khokhlov_a_multi_integration_monte_karlo_seq {
 class MonteCarloSeq : public ppc::core::Task {
  public:
   explicit MonteCarloSeq(ppc::core::TaskDataPtr task_data, std::function<double(const std::vector<double>&)> f)
-   : Task(std::move(task_data)), integrand_(f) {}
+      : Task(std::move(task_data)), integrand_(f) {}
   bool PreProcessingImpl() override;
   bool ValidationImpl() override;
   bool RunImpl() override;
@@ -26,4 +26,4 @@ class MonteCarloSeq : public ppc::core::Task {
   double result_;
 };
 
-}  // namespace khokhlov_a_multi_integration_monte_karlo
+}  // namespace khokhlov_a_multi_integration_monte_karlo_seq
