@@ -153,7 +153,11 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_1_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
   double expected = 1.718;
-  ASSERT_NEAR(res, expected, 1e-1);
+  if (res > expected) {
+    ASSERT_LE((res - expected) / expected, 1e-1);
+  } else {
+    ASSERT_LE((expected - res) / expected, 1e-1);
+  }
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim) {
@@ -182,8 +186,12 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double exp = 1.0;
-  ASSERT_NEAR(res, exp, 1e-1);
+  double expected = 1.0;
+  if (res > expected) {
+    ASSERT_LE((res - expected) / expected, 1e-1);
+  } else {
+    ASSERT_LE((expected - res) / expected, 1e-1);
+  }
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim_cos) {
@@ -212,8 +220,12 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim_cos) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double exp = 1.0;
-  ASSERT_NEAR(res, exp, 1e-1);
+  double expected = 1.0;
+  if (res > expected) {
+    ASSERT_LE((res - expected) / expected, 1e-1);
+  } else {
+    ASSERT_LE((expected - res) / expected, 1e-1);
+  }
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim) {
@@ -242,8 +254,12 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double exp = 1.5;
-  ASSERT_NEAR(res, exp, 1e-1);
+  double expected = 1.5;
+  if (res > expected) {
+    ASSERT_LE((res - expected) / expected, 1e-1);
+  } else {
+    ASSERT_LE((expected - res) / expected, 1e-1);
+  }
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim_1) {
@@ -272,8 +288,12 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim_1) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double exp = 0.125;
-  ASSERT_NEAR(res, exp, 1e-1);
+  double expected = 0.125;
+  if (res > expected) {
+    ASSERT_LE((res - expected) / expected, 1e-1);
+  } else {
+    ASSERT_LE((expected - res) / expected, 1e-1);
+  }
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_4_dim) {
@@ -302,6 +322,10 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_4_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double exp = 0.5;
-  ASSERT_NEAR(res, exp, 1e-1);
+  double expected = 0.5;
+  if (res > expected) {
+    ASSERT_LE((res - expected) / expected, 1e-1);
+  } else {
+    ASSERT_LE((expected - res) / expected, 1e-1);
+  }
 }
