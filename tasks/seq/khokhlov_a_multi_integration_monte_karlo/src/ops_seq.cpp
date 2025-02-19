@@ -41,7 +41,7 @@ bool khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq::RunImpl() {
   std::mt19937 gen(rd());
   std::uniform_real_distribution<> dis(0.0, 1.0);
   result_ = 0.0;
-  for (int i = 0; i < N_; i++) {
+  for (unsigned int i = 0; i < N_; i++) {
     std::vector<double> x(dimension_);
     for (unsigned int j = 0; j < dimension_; j++) {
       x[j] = lower_bound_[j] + (upper_bound_[j] - lower_bound_[j]) * dis(gen);
