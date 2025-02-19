@@ -132,7 +132,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_1_dim) {
   size_t dimension = 1;
   std::vector<double> l_bound = {0.0};
   std::vector<double> u_bound = {1.0};
-  int n = 100;
+  int n = 1000;
   double res = 0.0;
 
   // create task data
@@ -153,11 +153,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_1_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
   double expected = 1.718;
-  if (res > expected) {
-    ASSERT_LE((res - expected) / expected, 1e-1);
-  } else {
-    ASSERT_LE((expected - res) / expected, 1e-1);
-  }
+  ASSERT_NEAR(res, expected, 1e-1);
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim) {
@@ -165,7 +161,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim) {
   size_t dimension = 2;
   std::vector<double> l_bound = {0.0, 0.0};
   std::vector<double> u_bound = {1.0, 1.0};
-  int n = 100;
+  int n = 1000;
   double res = 0.0;
 
   // create task data
@@ -186,12 +182,8 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double expected = 1.0;
-  if (res > expected) {
-    ASSERT_LE((res - expected) / expected, 1e-1);
-  } else {
-    ASSERT_LE((expected - res) / expected, 1e-1);
-  }
+  double exp = 1.0;
+  ASSERT_NEAR(res, exp, 1e-1);
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim_cos) {
@@ -199,7 +191,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim_cos) {
   const int dimension = 2;
   std::vector<double> l_bound = {0.0, 0.0};
   std::vector<double> u_bound = {3.14159 / 2.0, 3.14159 / 2.0};
-  int n = 100;
+  int n = 1000;
   double res = 0.0;
 
   // create task data
@@ -220,12 +212,8 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim_cos) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double expected = 1.0;
-  if (res > expected) {
-    ASSERT_LE((res - expected) / expected, 1e-1);
-  } else {
-    ASSERT_LE((expected - res) / expected, 1e-1);
-  }
+  double exp = 1.0;
+  ASSERT_NEAR(res, exp, 1e-1);
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim) {
@@ -233,7 +221,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim) {
   const int dimension = 3;
   std::vector<double> l_bound = {0.0, 0.0, 0.0};
   std::vector<double> u_bound = {1.0, 1.0, 1.0};
-  int n = 100;
+  int n = 1000;
   double res = 0.0;
 
   // create task data
@@ -254,12 +242,8 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double expected = 1.5;
-  if (res > expected) {
-    ASSERT_LE((res - expected) / expected, 1e-1);
-  } else {
-    ASSERT_LE((expected - res) / expected, 1e-1);
-  }
+  double exp = 1.5;
+  ASSERT_NEAR(res, exp, 1e-1);
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim_1) {
@@ -267,7 +251,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim_1) {
   const int dimension = 3;
   std::vector<double> l_bound = {0.0, 0.0, 0.0};
   std::vector<double> u_bound = {1.0, 1.0, 1.0};
-  int n = 100;
+  int n = 1000;
   double res = 0.0;
 
   // create task data
@@ -288,12 +272,8 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_3_dim_1) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double expected = 0.125;
-  if (res > expected) {
-    ASSERT_LE((res - expected) / expected, 1e-1);
-  } else {
-    ASSERT_LE((expected - res) / expected, 1e-1);
-  }
+  double exp = 0.125;
+  ASSERT_NEAR(res, exp, 1e-1);
 }
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_4_dim) {
@@ -301,7 +281,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_4_dim) {
   const int dimension = 4;
   std::vector<double> l_bound = {0.0, 0.0, 0.0, 0.0};
   std::vector<double> u_bound = {1.0, 1.0, 1.0, 1.0};
-  int n = 100;
+  int n = 1000;
   double res = 0.0;
 
   // create task data
@@ -322,10 +302,6 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_4_dim) {
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
 
-  double expected = 0.5;
-  if (res > expected) {
-    ASSERT_LE((res - expected) / expected, 1e-1);
-  } else {
-    ASSERT_LE((expected - res) / expected, 1e-1);
-  }
+  double exp = 0.5;
+  ASSERT_NEAR(res, exp, 1e-1);
 }
