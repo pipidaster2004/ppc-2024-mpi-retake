@@ -52,8 +52,8 @@ bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::RunImpl() {
   broadcast(world_, N_, 0);
   lower_bound_.resize(dimension_);
   upper_bound_.resize(dimension_);
-  broadcast(world_, lower_bound_.data(), dimension_, 0);
-  broadcast(world_, upper_bound_.data(), dimension_, 0);
+  broadcast(world_, lower_bound_.data(), (int)dimension_, 0);
+  broadcast(world_, upper_bound_.data(), (int)dimension_, 0);
 
   if (world_.rank() == 0) {
     volume = 1.0 / N_;
@@ -63,8 +63,8 @@ bool khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi::RunImpl() {
   }
   broadcast(world_, volume, 0);
 
-  int delta = N_ / world_.size();
-  int last = N_ % world_.size();
+  int delta = (int)N_ / world_.size();
+  int last = (int)N_ % world_.size();
   std::random_device rd;
   std::mt19937 gen(world_.rank() + rd());
   std::uniform_real_distribution<> dis(0.0, 1.0);
