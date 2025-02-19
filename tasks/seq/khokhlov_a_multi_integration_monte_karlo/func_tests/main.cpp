@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <cmath>
+#include <cstddef>
 #include <vector>
 // #include <random>
 
@@ -42,5 +43,5 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_empty_bounds) {
   monte_carlo.PreProcessingImpl();
   monte_carlo.RunImpl();
   monte_carlo.PostProcessingImpl();
-  ASSERT_LE(res, etalon);
+  ASSERT_LE(abs(etalon - res) / etalon, etalon);
 }
