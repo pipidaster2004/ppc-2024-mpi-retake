@@ -35,7 +35,7 @@ bool khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq::RunImpl() {
     for (size_t j = 0; j < dimension_; j++) {
       x[j] = lower_bound_[j] + (upper_bound_[j] - lower_bound_[j]) * dis(gen);
     }
-    result_ += integrand_(x);
+    result_ += integrand(x);
   }
   double volume = 1.0 / N_;
   for (size_t i = 0; i < dimension_; i++) {
