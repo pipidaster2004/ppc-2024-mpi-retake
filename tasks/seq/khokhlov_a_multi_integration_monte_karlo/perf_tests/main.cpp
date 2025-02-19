@@ -7,7 +7,7 @@
 
 #include "core/perf/include/perf.hpp"
 #include "core/task/include/task.hpp"
-#include "seq/khokhlov_a_sum_values_by_rows/include/ops_sec.hpp"
+#include "seq/khokhlov_a_multi_integration_monte_karlo/include/ops_seq.hpp"
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_pipline_run_seq) {
   bool a = true;
