@@ -2,14 +2,17 @@
 
 #include <cmath>
 #include <cstddef>
+#include <cstdint>
+#include <memory>
+#include <numbers>
 #include <vector>
-// #include <random>
 
+#include "core/task/include/task.hpp"
 #include "seq/khokhlov_a_multi_integration_monte_karlo/include/ops_seq.hpp"
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_dimension) {
   // create data
-  size_t dimension = 0;
+  unsigned int dimension = 0;
   std::vector<double> l_bound = {0.0};
   std::vector<double> u_bound = {1.0};
   int n = 100;
@@ -33,7 +36,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_dimension) {
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_iter) {
   // create data
-  size_t dimension = 1;
+  unsigned int dimension = 1;
   std::vector<double> l_bound = {0.0};
   std::vector<double> u_bound = {1.0};
   int n = 0;
@@ -57,7 +60,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_iter) {
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_bounds) {
   // create data
-  size_t dimension = 1;
+  unsigned int dimension = 1;
   std::vector<double> l_bound;
   std::vector<double> u_bound;
   int n = 100;
@@ -81,7 +84,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_bounds) {
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_bounds_1) {
   // create data
-  size_t dimension = 1;
+  unsigned int dimension = 1;
   std::vector<double> l_bound = {1.0};
   std::vector<double> u_bound = {0.0};
   int n = 100;
@@ -105,7 +108,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_bounds_1) {
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_bounds_2) {
   // create data
-  size_t dimension = 2;
+  unsigned int dimension = 2;
   std::vector<double> l_bound = {0.0, 0.0};
   std::vector<double> u_bound = {1.0};
   int n = 100;
@@ -129,7 +132,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_invalid_bounds_2) {
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_1_dim) {
   // create data
-  size_t dimension = 1;
+  unsigned int dimension = 1;
   std::vector<double> l_bound = {0.0};
   std::vector<double> u_bound = {1.0};
   int n = 1000;
@@ -158,7 +161,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_1_dim) {
 
 TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim) {
   // create data
-  size_t dimension = 2;
+  unsigned int dimension = 2;
   std::vector<double> l_bound = {0.0, 0.0};
   std::vector<double> u_bound = {1.0, 1.0};
   int n = 1000;
@@ -190,7 +193,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_2_dim_cos) {
   // create data
   const int dimension = 2;
   std::vector<double> l_bound = {0.0, 0.0};
-  std::vector<double> u_bound = {3.14159 / 2.0, 3.14159 / 2.0};
+  std::vector<double> u_bound = {std::numbers::pi / 2.0, std::numbers::pi / 2.0};
   int n = 1000;
   double res = 0.0;
 
@@ -296,7 +299,9 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_4_dim) {
 
   // crate task
   khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq monte_carlo(task_data_seq);
-  monte_carlo.integrand = [](const std::vector<double> &point) { return point[0] * point[1] + point[2] * point[3]; };
+  monte_carlo.integrand = [](const std::vector<double> &point) {
+    return (point[0] * point[1]) + (point[2] * point[3]);
+  };
   ASSERT_TRUE(monte_carlo.ValidationImpl());
   monte_carlo.PreProcessingImpl();
   monte_carlo.RunImpl();

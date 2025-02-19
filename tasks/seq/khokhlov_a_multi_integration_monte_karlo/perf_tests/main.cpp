@@ -2,7 +2,6 @@
 
 #include <chrono>
 #include <cmath>
-#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <vector>
@@ -30,7 +29,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_pipline_run_seq) {
   // crate task
   auto test_task_seq = std::make_shared<khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq>(task_data_seq);
   test_task_seq->integrand = [](const std::vector<double> &point) {
-    return cos(point[0]) + sin(point[1]) * cos(point[2]);
+    return cos(point[0]) + (sin(point[1]) * cos(point[2]));
   };
 
   // create perf attrib
@@ -72,7 +71,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_task_run_seq) {
   // crate task
   auto test_task_seq = std::make_shared<khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq>(task_data_seq);
   test_task_seq->integrand = [](const std::vector<double> &point) {
-    return cos(point[0]) + sin(point[1]) * cos(point[2]);
+    return cos(point[0]) + (sin(point[1]) * cos(point[2]));
   };
 
   // create perf attrib

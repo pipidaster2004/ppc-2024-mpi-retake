@@ -22,8 +22,8 @@ class MonteCarloMpi : public ppc::core::Task {
 
  private:
   boost::mpi::communicator world_;
-  size_t dimension_;
-  int N_;
+  unsigned int dimension_;
+  unsigned int N_;
   std::vector<double> lower_bound_, local_l_bound_;
   std::vector<double> upper_bound_, local_u_bound_;
   double result_;

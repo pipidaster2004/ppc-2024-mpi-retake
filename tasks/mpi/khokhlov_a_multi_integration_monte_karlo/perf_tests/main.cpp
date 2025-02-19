@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
+#include <boost/mpi/communicator.hpp>
 #include <chrono>
 #include <cmath>
-#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <vector>
@@ -33,7 +33,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_mpi, test_pipline_run_mpi) {
   // crate task
   auto test_task_mpi = std::make_shared<khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi>(task_data_mpi);
   test_task_mpi->integrand = [](const std::vector<double> &point) {
-    return cos(point[0]) + sin(point[1]) * cos(point[2]);
+    return cos(point[0]) + (sin(point[1]) * cos(point[2]));
   };
 
   // create perf attrib
@@ -80,7 +80,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_mpi, test_task_run_mpi) {
   // crate task
   auto test_task_mpi = std::make_shared<khokhlov_a_multi_integration_monte_karlo_mpi::MonteCarloMpi>(task_data_mpi);
   test_task_mpi->integrand = [](const std::vector<double> &point) {
-    return cos(point[0]) + sin(point[1]) * cos(point[2]);
+    return cos(point[0]) + (sin(point[1]) * cos(point[2]));
   };
 
   // create perf attrib

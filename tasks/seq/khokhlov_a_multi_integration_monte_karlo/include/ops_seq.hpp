@@ -19,8 +19,8 @@ class MonteCarloSeq : public ppc::core::Task {
   std::function<double(const std::vector<double>&)> integrand;
 
  private:
-  size_t dimension_;
-  int N_;
+  unsigned int dimension_;
+  unsigned int N_;
   std::vector<double> lower_bound_;
   std::vector<double> upper_bound_;
   double result_;
