@@ -15,7 +15,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_pipline_run_seq) {
   const int dimension = 3;
   std::vector<double> l_bound = {0.0, 0.0, 0.0};
   std::vector<double> u_bound = {1.0, 1.0, 1.0};
-  int n = 100;
+  int n = 5000000;
   double res = 0.0;
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
@@ -57,7 +57,7 @@ TEST(khokhlov_a_multi_integration_monte_karlo_seq, test_task_run_seq) {
   const int dimension = 3;
   std::vector<double> l_bound = {0.0, 0.0, 0.0};
   std::vector<double> u_bound = {1.0, 1.0, 1.0};
-  int n = 100;
+  int n = 5000000;
   double res = 0.0;
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
