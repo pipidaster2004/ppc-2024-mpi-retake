@@ -6,8 +6,10 @@
 
 bool khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq::PreProcessingImpl() {
   dimension_ = task_data->inputs_count[0];
+  lower_bound_ = std::vector<double>(dimension_);
   auto* lbound = reinterpret_cast<double*>(task_data->inputs[0]);
   std::copy(lbound, lbound + dimension_, lower_bound_.data());
+  upper_bound_ = std::vector<double>(dimension_);
   auto* ubound = reinterpret_cast<double*>(task_data->inputs[1]);
   std::copy(ubound, ubound + dimension_, upper_bound_.data());
   N_ = task_data->inputs_count[1];
@@ -16,6 +18,7 @@ bool khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq::PreProcessingI
 
 bool khokhlov_a_multi_integration_monte_karlo_seq::MonteCarloSeq::ValidationImpl() {
   if (task_data->inputs_count[0] < 1 || task_data->inputs_count[1] < 1) return false;
+  if (task_data->inputs_count[2] != task_data->inputs_count[3]) return false;
   auto* lbound = reinterpret_cast<double*>(task_data->inputs[0]);
   auto* ubound = reinterpret_cast<double*>(task_data->inputs[1]);
   if (lbound == nullptr || ubound == nullptr) return false;
